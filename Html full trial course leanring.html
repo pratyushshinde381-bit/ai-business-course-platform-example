@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Business Mastery Course | Pratyush Sunil Shinde</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Modern CSS Variables */
+        :root {
+            --primary: #f80505;
+            --primary-hover: #1511e9;
+            --bg-color: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #0f172a;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --transition: all 0.3s ease;
+            
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--surface);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            margin-left: 20px;
+            padding: 8px 16px;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .nav-links button:hover, .nav-links button.active {
+            background-color: #eff6ff;
+            color: var(--primary);
+        }
+
+        /* Hero Section (Expert Info) */
+        .hero {
+            text-align: center;
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h2 {
+            font-size: 1.25rem;
+            color: #93c5fd;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: #cbd5e1;
+            font-size: 1rem;
+        }
+
+        /* Container & Sections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        /* Course Grid */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        .course-tag {
+            background: #eff6ff;
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+            width: max-content;
+        }
+
+        .course-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .course-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            /* Minimum touch target size for iOS */
+            min-height: 44px; 
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+        
+        .btn:disabled {
+            background-color: var(--text-light);
+            cursor: not-allowed;
+        }
+
+        /* Dashboard View */
+        #dashboard-view {
+            display: none; /* Hidden by default */
+        }
+
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .my-courses-list {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .my-course-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 8px;
+        }
+
+        .my-course-item:last-child {
+            border-bottom: none;
+        }
+
+        .my-course-item:hover, .my-course-item.active {
+            background-color: #f1f5f9;
+        }
+
+        .my-course-item h4 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        /* Video Player Area */
+        .video-player-container {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .video-aspect-ratio {
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            position: relative;
+            background: #000;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-direction: column;
+        }
+
+        .video-placeholder svg {
+            width: 64px;
+            height: 64px;
+            fill: white;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .video-details {
+            padding: 2rem;
+        }
+
+        .empty-dashboard {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-light);
+            grid-column: 1 / -1;
+        }
+
+        /* Responsive / iOS Optimization */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+            }
+            .video-player-container {
+                order: -1; /* Video player appears above list on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">AI Business Mastery</div>
+        <div class="nav-links">
+            <button id="nav-home" class="active" onclick="switchTab('home')">Courses</button>
+            <button id="nav-dashboard" onclick="switchTab('dashboard')">My Dashboard</button>
+        </div>
+    </nav>
+
+    <!-- Home View -->
+    <div id="home-view">
+        <!-- Expert Info -->
+        <header class="hero">
+            <h1>Pratyush Sunil Shinde</h1>
+            <h2>AI Expert & Researcher</h2>
+            <p>Specializing in Agentic AI, Quantitative Systems, and deploying cutting-edge AI architectures for real-world business automation and growth.</p>
+        </header>
+
+        <!-- Course List -->
+        <div class="container">
+            <h2 class="section-title">Available AI Courses</h2>
+            <div class="course-grid" id="course-grid">
+                <!-- Courses injected via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard View -->
+    <div id="dashboard-view" class="container">
+        <h2 class="section-title">Student Dashboard</h2>
+        <div class="dashboard-layout" id="dashboard-layout">
+            <!-- Content injected via JavaScript based on selection -->
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // Course Database
+        const courses = [
+            {
+                id: 1,
+                title: "Agentic AI for Enterprise Automation",
+                tag: "Advanced",
+                description: "Learn how to build and deploy autonomous AI agents that can execute complex business workflows without human intervention."
+            },
+            {
+                id: 2,
+                title: "AI-Driven Quantitative Analysis",
+                tag: "Business Strategy",
+                description: "Leverage machine learning and predictive AI models to analyze market trends and make data-backed business decisions."
+            },
+            {
+                id: 3,
+                title: "Integrating AI into Business Operations",
+                tag: "Beginner",
+                description: "A comprehensive guide to auditing your current business processes and implementing cost-effective AI solutions."
+            }
+        ];
+
+        // State Management
+        let enrolledCourses = [];
+        let activeVideoId = null;
+
+        // Initialize App
+        function initApp() {
+            renderCourseGrid();
+            renderDashboard();
+        }
+
+        // Render Home Page Courses
+        function renderCourseGrid() {
+            const grid = document.getElementById('course-grid');
+            grid.innerHTML = '';
+
+            courses.forEach(course => {
+                const isEnrolled = enrolledCourses.includes(course.id);
+                
+                const card = document.createElement('div');
+                card.className = 'course-card';
+                card.innerHTML = `
+                    <span class="course-tag">${course.tag}</span>
+                    <h3>${course.title}</h3>
+                    <p>${course.description}</p>
+                    <button class="btn" 
+                            onclick="enrollCourse(${course.id})" 
+                            ${isEnrolled ? 'disabled' : ''}>
+                        ${isEnrolled ? 'Added to Dashboard' : 'Add to Dashboard'}
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Handle Enrollment
+        function enrollCourse(courseId) {
+            if (!enrolledCourses.includes(courseId)) {
+                enrolledCourses.push(courseId);
+                
+                // Automatically set the newly enrolled course as the active video if none is set
+                if (!activeVideoId) {
+                    activeVideoId = courseId;
+                }
+                
+                renderCourseGrid(); // Update button state
+                renderDashboard();  // Update dashboard UI
+                
+                // Jump to dashboard
+                switchTab('dashboard');
+            }
+        }
+
+        // Handle Video Selection in Dashboard
+        function playCourse(courseId) {
+            activeVideoId = courseId;
+            renderDashboard();
+        }
+
+        // Render Dashboard Content
+        function renderDashboard() {
+            const dashboardLayout = document.getElementById('dashboard-layout');
+            
+            if (enrolledCourses.length === 0) {
+                dashboardLayout.innerHTML = `
+                    <div class="empty-dashboard">
+                        <h3>No courses selected yet.</h3>
+                        <p style="margin-top:10px; margin-bottom:20px;">Browse the course list and add content to your dashboard to start learning.</p>
+                        <button class="btn" style="width:auto;" onclick="switchTab('home')">Browse Courses</button>
+                    </div>
+                `;
+                return;
+            }
+
+            // Generate Sidebar List
+            let sidebarHTML = '<div class="my-courses-list">';
+            enrolledCourses.forEach(id => {
+                const course = courses.find(c => c.id === id);
+                const isActive = activeVideoId === id ? 'active' : '';
+                sidebarHTML += `
+                    <div class="my-course-item ${isActive}" onclick="playCourse(${id})">
+                        <h4>${course.title}</h4>
+                        <span style="font-size: 0.8rem; color: var(--text-light)">Click to watch</span>
+                    </div>
+                `;
+            });
+            sidebarHTML += '</div>';
+
+            // Generate Video Player Area
+            const activeCourse = courses.find(c => c.id === activeVideoId);
+            const playerHTML = `
+                <div class="video-player-container">
+                    <div class="video-aspect-ratio">
+                        <div class="video-placeholder">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <p>Now Playing: Module 1</p>
+                        </div>
+                    </div>
+                    <div class="video-details">
+                        <span class="course-tag">${activeCourse.tag}</span>
+                        <h2 style="margin: 10px 0;">${activeCourse.title}</h2>
+                        <p style="color: var(--text-light);">${activeCourse.description}</p>
+                    </div>
+                </div>
+            `;
+
+            dashboardLayout.innerHTML = sidebarHTML + playerHTML;
+        }
+
+        // Tab Switching Logic
+        function switchTab(tab) {
+            const homeView = document.getElementById('home-view');
+            const dashboardView = document.getElementById('dashboard-view');
+            const navHome = document.getElementById('nav-home');
+            const navDashboard = document.getElementById('nav-dashboard');
+
+            if (tab === 'home') {
+                homeView.style.display = 'block';
+                dashboardView.style.display = 'none';
+                navHome.classList.add('active');
+                navDashboard.classList.remove('active');
+            } else {
+                homeView.style.display = 'none';
+                dashboardView.style.display = 'block';
+                navHome.classList.remove('active');
+                navDashboard.classList.add('active');
+            }
+            
+            // Scroll to top when switching
+            window.scrollTo(0, 0);
+        }
+
+        // Boot up
+        initApp();
+    </script>
+</body>
+</html>
